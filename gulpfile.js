@@ -4,20 +4,21 @@
 
 // Motivation
 //
-// Some backend template languages are not supersets of HTML. Depending on the
-// backend template engine used, it can be tricky to automatically wire the
-// compiled scripts and styles to our view templates. Because of this, the
+// A few template languages in the Node.js ecosystem are not supersets of HTML.
+// Depending on the template engine used, it can be tricky to automatically wire
+// the compiled scripts and styles to our view templates. Because of this, the
 // gulpfile leaves that responsiblity to the app developer. Much can still be
-// automated though. This gulpfile aims to:
+// automated though. The gulpfile aims to:
 
 // - Automate CoffeeScript and SASS compilation
 // - Automate JavaScript linting, minification, concatenation and source-mapping
 // - Automate CSS vendor-prefixing, minification, concatenation and
 //   source-mapping
 // - Automate image optimization
-// - Ease local development by working with source static assets, but test
-//   against compiled, source-mapped static assets
-// - Restart the local server whenever Node scripts are modified
+// - Ease local development by working with structured source static assets,
+//   but test against compiled, source-mapped static assets
+// - Restart the local server automatically whenever Node.js scripts are
+//   modified
 // - Live reload the app whenever static assets are recompiled
 
 // The Default Task
@@ -29,9 +30,9 @@
 //
 // Use `gulp styles` to compile source styles into one concatenated stylesheet
 // in the destination directory. Both CSS and SASS sources are supported. CSS
-// vendor prefixes are added automatically, using data from http://caniuse.com.
-// The `AUTOPREFIXER_BROWSERS` constant determines what browser versions should
-// be supported.
+// vendor prefixes are added automatically, using data from
+// <http://caniuse.com>. The `AUTOPREFIXER_BROWSERS` constant determines what
+// browser versions should be supported.
 //
 // Use `gulp styles --production` to also minify the styles and exclude
 // source-maps.
