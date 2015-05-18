@@ -19,6 +19,13 @@ automated though. The gulpfile aims to:
 - Restart the local server automatically whenever Node.js scripts are modified
 - Live reload the app whenever static assets are recompiled
 
+## Installation
+
+- `git clone https://github.com/Wenzil/node-gulp-starter.git`
+- `cd node-gulp-starter`
+- `npm install`
+- Feel free to rename the project and remove the `.git` folder
+
 ## The Default Task
 
 Use `gulp` to clean the destination directory and compile source static
@@ -92,3 +99,33 @@ browser extension is required for live reloading to work.
 - HTML & view template minification
 - Asset Versioning
 - Unit testing and continous integration tasks
+
+## Gulpfile Configuration
+The following constants can be edited in the gulpfile for quick configuration.
+
+### PATHS
+- `staticRoot`: The public static asset directory. Defaults to `'dist'`.
+- `styles.src`, `styles.dest` & `styles.concat`: The source and destination
+  directories along with the filepath for the concatenated stylesheet (relative
+  to the destination directory).
+- `scripts.src`, `scripts.dest` & `scripts.concat`: The source and destination
+  directories along with the filepath for the concatenated script (relative to
+  the destination directory).
+- `images.src` & `images.dest`: The source and destination image directories.
+- `fonts.src` & `images.dest`: The source and destination font directories.
+- `appFiles`: Locations for files that should restart the server when modified.
+- `server`: The Node.js server.
+
+### SERVER_URL
+Where the local server is hosted. Defaults to `'localhost:3000'`.
+
+### PROXY_PORT
+The port for the BrowserSync middleware proxy. Defaults to `5000`.
+
+### PRODUCTION
+Whether to run/build the app for production. Controlled by the `--production`
+flag by default.
+
+### AUTOPREFIXER_BROWSERS
+Browsers to support, which determines what CSS vendor prefixes are added by the 
+style compilation task.

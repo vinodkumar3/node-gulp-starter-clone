@@ -6,9 +6,9 @@
 //
 // A few template languages in the Node.js ecosystem are not supersets of HTML.
 // Depending on the template engine used, it can be tricky to automatically wire
-// the compiled scripts and styles to our view templates. Because of this, the
+// the compiled scripts and styles to our view templates. Because of this, this
 // gulpfile leaves that responsiblity to the app developer. Much can still be
-// automated though. The gulpfile aims to:
+// automated though. This gulpfile aims to:
 
 // - Automate CoffeeScript and SASS compilation
 // - Automate JavaScript linting, minification, concatenation and source-mapping
@@ -100,7 +100,7 @@ var runSequence = require('run-sequence');
 var argv = require('yargs').argv;
 
 var PATHS = {
-  staticRoot: 'dist', // The public static directory
+  staticRoot: 'dist', // The public static asset directory
   styles: {
     src: 'assets/styles/**/*.@(css|scss)',
     dest: 'dist/styles',
@@ -120,19 +120,18 @@ var PATHS = {
     dest: 'dist/fonts'
   },
   // Locations for files that should restart the server when modified
-  appFiles: ['app.js', 'api', 'routes', 'models', 'views'],
-  appFileExtensions: ['js', 'jade', 'ejs', 'html'],
-  server: './bin/www', // The Node.js server
+  appFiles: ['app.js', 'api/**/*.js', 'routes/**/*.js', 'models/**/*.js'],
+  server: 'server.js', // The Node.js server
 };
 
 var SERVER_URL = 'http://localhost:3000'; // Where the local server is hosted
 var PROXY_PORT = 5000; // The port for the BrowserSync middleware proxy
-var PRODUCTION = argv.production // Whether to run the app in production mode
+var PRODUCTION = argv.production // Whether to run/build the app for production
   ? true
   : false;
 
 // Browsers to support, which determines what CSS vendor prefixes are added by
-// gulp-autoprefixer
+// the style compilation task
 var AUTOPREFIXER_BROWSERS = [
   'ie >= 10',
   'ie_mob >= 10',
@@ -145,7 +144,7 @@ var AUTOPREFIXER_BROWSERS = [
   'bb >= 10'
 ];
 
-// Clean the public static directory
+// Clean the public static asset directory
 gulp.task('clean', del.bind(null, PATHS.staticRoot));
 
 // Compile development and production static assets, the default task
@@ -226,8 +225,7 @@ gulp.task('serve', function() {
           : 'development'
       },
       // The files that should restart the server when modified
-      watch: PATHS.appFiles.concat([PATHS.server]),
-      ext: PATHS.appFileExtensions
+      watch: PATHS.appFiles.concat([PATHS.server])
     })
     .once('start', function () {
       // Start a proxy that reacts to static asset recompilations
